@@ -49,6 +49,8 @@
             <h4 style="color: #f5a425;">Admin:<br>{{Auth::user()->name}}</h4>
             </center>
             <hr>
+            <div><a href="{{route('filiéres.index')}}" style="padding:15px 35px;">Filiéres</a></div>
+            <div><a href="{{route('modules.index')}}" style="padding:15px 35px;">Module</a></div>
             <div><a href="{{route('groupes.index')}}" style="padding:15px 35px;">Groupes</a></div>
             <div><a href="{{route('profs.index')}}">Professeurs</a></div>
             <div><a href="{{route('addEtudiant')}}">Etudiant</a></div>
