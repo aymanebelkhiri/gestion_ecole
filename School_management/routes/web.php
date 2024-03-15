@@ -113,13 +113,11 @@ Route::get('/etude/{grp}', function ($grp) {
 // Route::resource('events', App\Http\Controllers\GroupesController::class);
 // Route::resource('messages', App\Http\Controllers\GroupesController::class);
 
+Route::resource('filiéres', App\Http\Controllers\FiliéreController::class, ['names' => 'filiéres']);
+Route::resource('modules', App\Http\Controllers\ModuleController::class, ['names' => 'modules']);
 Route::resource('groupes', App\Http\Controllers\GroupeController::class, ['names' => 'groupes']);
-// Route::resource('etudiants', App\Http\Controllers\EtudiantRController::class, ['names' => 'etudiants']);
+Route::resource('etudiants', App\Http\Controllers\EtudiantRController::class, ['names' => 'etudiants']);
 Route::resource('profs', App\Http\Controllers\ProfController::class, ['names' => 'profs']);
-
-// Route::resource('exams', App\Http\Controllers\GroupesController::class);
-// Route::resource('events', App\Http\Controllers\GroupesController::class);
-// Route::resource('messages', App\Http\Controllers\GroupesController::class);
 
 Route::put('profs/{prof}', [App\Http\Controllers\ProfController::class, 'update'])->name('profs.update');
 Route::resource('events', App\Http\Controllers\EventsController::class, ['names' => 'events']);
