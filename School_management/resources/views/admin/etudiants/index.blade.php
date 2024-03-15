@@ -33,8 +33,9 @@
 
 @endphp
     <div class="container">
-        <center><h1><i>List Students</i></h1></center><br>
-        <form action="" method="post" class="row">
+        <center><h1><i>Filter Students</i></h1></center><br>
+        <form action="{{route('filtreretudiant')}}" method="post" class="row">
+            @csrf
             <div class="col-6">
         
                 <label  class=" form-label">  filiere :</label><br>
@@ -88,7 +89,7 @@
             </div>
             <center>
 
-                <button type="submit" class="btn btn-primary col-4">add</button>
+                <button type="submit" class="btn btn-primary col-4">Filter</button>
             </center>
         </form>
         

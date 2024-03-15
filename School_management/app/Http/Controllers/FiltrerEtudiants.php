@@ -8,7 +8,7 @@ class FiltrerEtudiants extends Controller
 {
     public function store(Request $request)
     {
-        return view('admin.etudiants.filter',[
+        return view('admin.etudiants.liste',[
             "data"=>$request->all()
         ]);
         

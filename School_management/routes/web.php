@@ -17,8 +17,11 @@ use App\Http\Controllers\MessageSecretaryController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\addAbsence;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EtudiantCont;
 use App\Http\Controllers\FiltrerEtudiants;
 use App\Http\Controllers\GroupeController;
+use App\Http\Controllers\UpdateEtudiant;
 // use App\Http\Controllers\NoteController;
 // use App\Http\Controllers\GroupesController;
 
@@ -53,13 +56,16 @@ Route::get('/prof', [App\Http\Controllers\HomeProfController::class, 'index'])->
 
 Route::post('profexamen', [ExamenController::class, 'store'])->name('examens.store');
 Route::post('addNote', [AddNote::class, 'store'])->name('note.store');
-Route::post('addd_Etudiants', [FiltrerEtudiants::class, 'store'])->name('filtrer.store');
+Route::post('addd_Etudiants', [FiltrerEtudiants::class, 'store'])->name('filtreretudiant');
+Route::post('/registerEtudiant', [RegisterController::class, 'create'])->name('registerEtudiant');
+Route::put('/updateEtudiant/{id}', [UpdateEtudiant::class, 'update'])->name('update');
 Route::post('addAbsence', [addAbsence::class, 'store'])->name('absence.store2');
 Route::post('note_etudiant', [NoteController::class, 'store'])->name('note.store2');
 Route::get('edit_note/{id}', [NoteController::class, 'edit'])->name('note.edit');
 Route::resource('notes', NoteController::class);
 Route::resource('absence', Absence::class);
 Route::resource('exams', Exams::class);
+Route::resource('adminEtudiant', EtudiantCont::class);
 
 
 Route::get('/profexamen', function () {
@@ -80,9 +86,15 @@ Route::get('/note', function () {
     return view('prof.note');
 })->name("addNote");
 
+
 Route::get('/add_Etudiant', function () {
     return view('admin.etudiants.index');
 })->name("addEtudiant");
+
+Route::get('/etude/{grp}', function ($grp) {
+    return view('admin.etudiants.filter', ["grp" => $grp]);
+})->name("etude");
+
 
 
 // Route::middleware(["role:etudiants"])->group(function(){

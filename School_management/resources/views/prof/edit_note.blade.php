@@ -22,7 +22,7 @@
         <form action="{{route('notes.update',$note->id_note)}}" method="post">
             
             @php
-                $Etudiant=Etudiant::findOrFail($note->Etudiant);
+                $Etudiant=Etudiant::where("id_etudiant",$note->Etudiant)->first();
                 $groupes = Groupe::findOrFail($Etudiant->Groupe);
                 $notee = Note::findOrFail($note->id_note);
             @endphp

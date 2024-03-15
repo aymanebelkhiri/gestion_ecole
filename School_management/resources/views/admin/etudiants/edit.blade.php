@@ -1,47 +1,74 @@
 @extends('admin.header')
 @section('adminContent')
-<center><h1><i>Modifier un etudiant</i></h1></center>
-<form action="{{ route('etudiants.update',$Etudiant->id_etudiant) }}" method='POST'>
-   @csrf
-   @method('PUT')
-   <div class="mb-3">
-    <label for="matricule" class="form-label">Matricule </label>
-    <input type="number" class="form-control" id="matricule" name='matricule' value='{{$Etudiant->Matricule}}'>
-  </div>
-  <div class="mb-3">
-    <label for="nom" class="form-label">Nom </label>
-    <input type="text" class="form-control" id="nom" name='nom' value='{{$Etudiant->Nom}}'>
-  </div>
-  <div class="mb-3">
-    <label for="prenom" class="form-label">Prenom </label>
-    <input type="text" class="form-control" id="prenom" name='prenom' value='{{$Etudiant->Prenom}}'>
-  </div>
-  <div class="mb-3">
-    <label for="date" class="form-label">Date de naissance </label>
-    <input type="date" class="form-control" id="date" name='date' value='{{$Etudiant->DateNaissance}}'>
-  </div>
-  <div class="mb-3">
-    <label for="Age" class="form-label">Age </label>
-    <input type="number" class="form-control" id="Age" name='age' value='{{$Etudiant->Age}}'>
-  </div>
-  <div class="mb-3">
-    <label for="sexe" class="form-label">Sexe </label>
-    <input type="text" class="form-control" id="sexe" name='sexe' value='{{$Etudiant->Sexe}}'>
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email </label>
-    <input type="email" class="form-control" id="email" name='email' value='{{$Etudiant->Email}}'>
-</div>
+@php
+    use App\Models\Prof;
+    use App\Models\MessageProf;
+    use App\Models\Etudiant;
+    use App\Models\Groupe;
+    use App\Models\FiliéresProf;
+    use App\Models\Filiére;
+    $etudiant = Etudiant::where("id_etudiant",$id)->first();
+@endphp
+<div>
+  <center><h1>Edit Student</h1></center><br><br>
+  <form action="{{ route('update',$etudiant->id_etudiant) }}" class="row" method='POST'>
+    @csrf
+    @method('PUT')
+    <div class="col-md-6 mb-3">
+      <label for="name" class="col-md-12 col-form-label ">{{ __('Name') }}</label>
 
-  <div class="mb-3">
-    <label for="S" class="form-label">Groupes</label>
-    <select  class="form-control" id="S" name='groupe' value='{{$Etudiant->Groupe}}'>
-        @isset($Groupes)
-        @foreach ($Groupes as $Groupe )
-          <option value='{{$Groupe->Nom}}'>{{$Groupe->Nom}}</option>
-        @endforeach
-        @endisset
-    </select>      
+      <div>
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$etudiant->Nom}}" required autocomplete="name" autofocus>
+
+          @error('name')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+      </div>
   </div>
-  <button type="submit" class="btn btn-primary">Ajouter</button>
+
+  <div class="col-md-6">
+      <label for="email" class="col-md-12 col-form-label ">{{ __('Email Address') }}</label>
+
+      <div >
+          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$etudiant->Email}}" required autocomplete="email">
+
+          @error('email')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+      </div>
+  </div>
+
+  
+  <div class="col-md-6">
+      <label for="" class="col-md-12 col-form-label ">{{ __('Birthday') }}</label>
+
+      <div class="">
+          <input id="" type="date" class="form-control" value="{{$etudiant->DateNaissance}}" name="date" required >
+      </div>
+  </div>
+  
+  <div class="col-md-6">
+      <label for="" class="col-md-12 col-form-label ">{{ __('Matricule') }}</label>
+
+      <div class="">
+          <input id="" type="number" class="form-control" value="{{$etudiant->Matricule}}" name="matricule" required >
+      </div>
+  </div>
+  <input type="hidden" value="{{$grp}}" name="grp" >
+
+
+  <center>
+      <br>
+      <button type="submit" class="btn btn-primary col-4">
+          {{ __('Edit') }}
+      </button>
+
+  </center>
+  </form>
+
+</div>
 @endsection
